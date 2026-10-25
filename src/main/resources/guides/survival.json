@@ -20,11 +20,11 @@
         {
           "id": "gather_sticks_fiber",
           "title": "Gather sticks and plant fiber",
-          "text": "Pick up loose sticks lying on the ground and break small branches. Break tall grass, bushes and tree leaves by hand for Plant Fiber.",
-          "hint": "Forest edges near spawn have plenty of both.",
+          "text": "Pick up loose sticks lying on the ground. Break bushes by hand: they drop both sticks and Plant Fiber. Tree leaves drop fiber too (grass drops nothing).",
+          "hint": "Follow the waypoint to the nearest bush or loose sticks.",
           "objectives": [
-            { "type": "item", "id": "Ingredient_Stick", "count": 6, "label": "Sticks" },
-            { "type": "item", "id": "Ingredient_Fibre", "count": 6, "label": "Plant Fiber" }
+            { "type": "item", "id": "Ingredient_Stick", "count": 6, "label": "Sticks", "find": ["Wood_Sticks", "Plant_Bush*"] },
+            { "type": "item", "id": "Ingredient_Fibre", "count": 6, "label": "Plant Fiber", "find": ["Plant_Bush*", "Plant_Leaves_*"] }
           ],
           "skipIf": [
             { "type": "item", "ids": ["Tool_Pickaxe_Crude", "Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
@@ -36,7 +36,7 @@
           "text": "Small loose stones are scattered on the ground, especially near rocks and cliffs. Pick them up by hand.",
           "hint": "Any rubble type counts: stone, calcite, basalt and so on.",
           "objectives": [
-            { "type": "resource", "id": "Rubble", "count": 6, "label": "Rubble (any)" }
+            { "type": "resource", "id": "Rubble", "count": 6, "label": "Rubble (any)", "find": ["Rubble_*"] }
           ],
           "skipIf": [
             { "type": "item", "ids": ["Tool_Pickaxe_Crude", "Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
@@ -64,7 +64,7 @@
           "text": "Use your hatchet on tree trunks. You'll need logs for the Workbench, the Furnace and your first metal tools.",
           "hint": "Any tree works; logs of every type count.",
           "objectives": [
-            { "type": "resource", "id": "Wood_Trunk", "count": 16, "label": "Logs (any wood)" }
+            { "type": "resource", "id": "Wood_Trunk", "count": 16, "label": "Logs (any wood)", "find": ["Wood_*_Trunk"] }
           ],
           "skipIf": [
             { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
@@ -75,7 +75,7 @@
           "title": "Mine some stone",
           "text": "Use your Crude Pickaxe on exposed stone. Cobblestone is needed for the Workbench and the Furnace.",
           "objectives": [
-            { "type": "resource", "id": "Rock", "count": 12, "label": "Stone / cobblestone (any)" }
+            { "type": "resource", "id": "Rock", "count": 12, "label": "Stone / cobblestone (any)", "find": ["Rock_Stone", "Rock_Stone_Mossy"] }
           ],
           "skipIf": [
             { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
@@ -113,6 +113,8 @@
           "id": "craft_furnace",
           "title": "Craft and place a Furnace",
           "text": "At the Workbench (Crafting tab), craft a Furnace: 6 Logs, 6 Stone. Place it next to your Workbench. The Furnace smelts ore into ingots.",
+          "find": ["Bench_WorkBench*"],
+          "findLabel": "Workbench",
           "objectives": [
             { "type": "item", "id": "Bench_Furnace", "count": 1, "label": "Furnace" }
           ],
@@ -126,7 +128,7 @@
           "text": "Copper forms small veins inside grey stone in Zone 1. Explore caves, ravines and cliff faces near spawn and look for stone flecked with orange.",
           "hint": "Copper is common in shallow caves. Bring a torch or campfire light if it's dark.",
           "objectives": [
-            { "type": "item", "ids": ["Ore_Copper", "Ingredient_Bar_Copper"], "count": 9, "label": "Copper Ore" }
+            { "type": "item", "ids": ["Ore_Copper", "Ingredient_Bar_Copper"], "count": 9, "label": "Copper Ore", "find": ["Ore_Copper*"] }
           ],
           "skipIf": [
             { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
@@ -136,6 +138,8 @@
           "id": "smelt_copper",
           "title": "Smelt Copper Ingots",
           "text": "Open the Furnace, add fuel (logs, sticks or plant fiber all burn) and put Copper Ore in. Each ore becomes one ingot.",
+          "find": ["Bench_Furnace*"],
+          "findLabel": "Furnace",
           "objectives": [
             { "type": "item", "id": "Ingredient_Bar_Copper", "count": 6, "label": "Copper Ingots" }
           ],
@@ -147,6 +151,8 @@
           "id": "craft_copper_pickaxe",
           "title": "Craft a Copper Pickaxe",
           "text": "At the Workbench (Tools tab): 3 Copper Ingots, 6 Logs, 1 Plant Fiber. It mines stone much faster and can break Iron Ore.",
+          "find": ["Bench_WorkBench*"],
+          "findLabel": "Workbench",
           "objectives": [
             { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1, "label": "Copper Pickaxe" }
           ]
@@ -156,6 +162,8 @@
           "title": "Craft a Copper Hatchet",
           "text": "At the Workbench (Tools tab): 3 Copper Ingots, 6 Logs, 3 Plant Fiber. You'll want a lot more wood from here on.",
           "hint": "Optional. Type /guide skip to move on.",
+          "find": ["Bench_WorkBench*"],
+          "findLabel": "Workbench",
           "objectives": [
             { "type": "item", "ids": ["Tool_Hatchet_Copper", "Tool_Hatchet_Iron", "Tool_Hatchet_Thorium", "Tool_Hatchet_Cobalt", "Tool_Hatchet_Adamantite"], "count": 1, "label": "Copper Hatchet" }
           ]
@@ -181,6 +189,8 @@
           "id": "craft_tannery",
           "title": "Craft a Tanning Rack",
           "text": "At the Workbench (Crafting tab): 6 Logs, 3 Stone, 3 Light Hide. Place it at your base.",
+          "find": ["Bench_WorkBench*"],
+          "findLabel": "Workbench",
           "objectives": [
             { "type": "item", "id": "Bench_Tannery", "count": 1, "label": "Tanning Rack" }
           ],
@@ -192,6 +202,8 @@
           "id": "tan_light_leather",
           "title": "Tan Light Leather",
           "text": "Put Light Hide on the Tanning Rack. Each hide becomes 1 Light Leather (about 20 seconds each).",
+          "find": ["Bench_Tannery*"],
+          "findLabel": "Tanning Rack",
           "objectives": [
             { "type": "item", "id": "Ingredient_Leather_Light", "count": 2, "label": "Light Leather" }
           ],
@@ -217,7 +229,7 @@
           "text": "Iron veins sit in stone, basalt and volcanic rock, usually deeper in Zone 1 caves than copper. Your Copper Pickaxe can break them.",
           "hint": "Follow caves downward. Dark rock (basalt) areas are a good sign.",
           "objectives": [
-            { "type": "item", "ids": ["Ore_Iron", "Ingredient_Bar_Iron"], "count": 5, "label": "Iron Ore" }
+            { "type": "item", "ids": ["Ore_Iron", "Ingredient_Bar_Iron"], "count": 5, "label": "Iron Ore", "find": ["Ore_Iron*"] }
           ],
           "skipIf": [
             { "type": "item", "ids": ["Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
@@ -227,6 +239,8 @@
           "id": "smelt_iron",
           "title": "Smelt Iron Ingots",
           "text": "Smelt the Iron Ore in your Furnace. Each ore takes about 14 seconds.",
+          "find": ["Bench_Furnace*"],
+          "findLabel": "Furnace",
           "objectives": [
             { "type": "item", "id": "Ingredient_Bar_Iron", "count": 5, "label": "Iron Ingots" }
           ],
@@ -238,6 +252,8 @@
           "id": "craft_iron_pickaxe",
           "title": "Craft an Iron Pickaxe",
           "text": "At the Workbench (Tools tab): 5 Iron Ingots, 2 Light Leather, 2 Linen Scraps.",
+          "find": ["Bench_WorkBench*"],
+          "findLabel": "Workbench",
           "objectives": [
             { "type": "item", "ids": ["Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1, "label": "Iron Pickaxe" }
           ]
@@ -265,6 +281,8 @@
           "id": "upgrade_workbench_2",
           "title": "Upgrade your Workbench to Tier 2",
           "text": "Open the Workbench and use its upgrade button to spend the materials. Tier 2 unlocks Thorium and Cobalt gear.",
+          "find": ["Bench_WorkBench*"],
+          "findLabel": "Workbench",
           "objectives": [
             { "type": "manual", "label": "Upgrade the Workbench, then /guide done" }
           ],
@@ -294,7 +312,7 @@
           "title": "Mine Thorium Ore",
           "text": "Thorium veins form in sandstone, dry mud and volcanic rock in Zone 2 caves. The Iron Pickaxe can mine it.",
           "objectives": [
-            { "type": "item", "ids": ["Ore_Thorium", "Ingredient_Bar_Thorium"], "count": 6, "label": "Thorium Ore" }
+            { "type": "item", "ids": ["Ore_Thorium", "Ingredient_Bar_Thorium"], "count": 6, "label": "Thorium Ore", "find": ["Ore_Thorium*"] }
           ],
           "skipIf": [
             { "type": "item", "ids": ["Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
@@ -304,6 +322,8 @@
           "id": "medium_leather",
           "title": "Get Medium Leather",
           "text": "Larger animals (moose, and beasts at hostile encounters in Zone 2 and up) drop Medium Hide. Tan it at the Tanning Rack.",
+          "find": ["Bench_Tannery*"],
+          "findLabel": "Tanning Rack",
           "objectives": [
             { "type": "item", "id": "Ingredient_Leather_Medium", "count": 2, "label": "Medium Leather" },
             { "type": "item", "id": "Ingredient_Fabric_Scrap_Linen", "count": 3, "label": "Linen Scraps" }
@@ -316,6 +336,8 @@
           "id": "smelt_thorium",
           "title": "Smelt Thorium Ingots",
           "text": "Back at base, smelt the Thorium Ore in your Furnace (about 18 seconds each).",
+          "find": ["Bench_Furnace*"],
+          "findLabel": "Furnace",
           "objectives": [
             { "type": "item", "id": "Ingredient_Bar_Thorium", "count": 6, "label": "Thorium Ingots" }
           ],
@@ -327,6 +349,8 @@
           "id": "craft_thorium_pickaxe",
           "title": "Craft a Thorium Pickaxe",
           "text": "At the Tier 2 Workbench (Tools tab): 6 Thorium Ingots, 2 Medium Leather, 3 Linen Scraps.",
+          "find": ["Bench_WorkBench*"],
+          "findLabel": "Workbench",
           "objectives": [
             { "type": "item", "ids": ["Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1, "label": "Thorium Pickaxe" }
           ]
@@ -352,7 +376,7 @@
           "title": "Mine Cobalt Ore",
           "text": "Cobalt veins form in shale, slate and basalt in Zone 3 caves. It's dark blue against the grey rock.",
           "objectives": [
-            { "type": "item", "ids": ["Ore_Cobalt", "Ingredient_Bar_Cobalt"], "count": 7, "label": "Cobalt Ore" }
+            { "type": "item", "ids": ["Ore_Cobalt", "Ingredient_Bar_Cobalt"], "count": 7, "label": "Cobalt Ore", "find": ["Ore_Cobalt*"] }
           ],
           "skipIf": [
             { "type": "item", "ids": ["Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
@@ -374,6 +398,8 @@
           "id": "smelt_cobalt",
           "title": "Smelt Cobalt Ingots",
           "text": "Smelt the Cobalt Ore in your Furnace.",
+          "find": ["Bench_Furnace*"],
+          "findLabel": "Furnace",
           "objectives": [
             { "type": "item", "id": "Ingredient_Bar_Cobalt", "count": 7, "label": "Cobalt Ingots" }
           ],
@@ -385,6 +411,8 @@
           "id": "craft_cobalt_pickaxe",
           "title": "Craft a Cobalt Pickaxe",
           "text": "At the Tier 2 Workbench (Tools tab): 7 Cobalt Ingots, 2 Heavy Leather, 4 Shadoweave Scraps.",
+          "find": ["Bench_WorkBench*"],
+          "findLabel": "Workbench",
           "objectives": [
             { "type": "item", "ids": ["Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1, "label": "Cobalt Pickaxe" }
           ]
@@ -414,6 +442,8 @@
           "id": "upgrade_workbench_3",
           "title": "Upgrade your Workbench to Tier 3",
           "text": "Spend the materials on the Workbench upgrade. It also crafts noticeably faster at this tier.",
+          "find": ["Bench_WorkBench*"],
+          "findLabel": "Workbench",
           "objectives": [
             { "type": "manual", "label": "Upgrade the Workbench, then /guide done" }
           ],
@@ -442,7 +472,7 @@
           "title": "Mine Adamantite Ore",
           "text": "Adamantite veins run through stone, basalt, slate and cooled magma in Zone 4 caves. Watch out for lava.",
           "objectives": [
-            { "type": "item", "ids": ["Ore_Adamantite", "Ingredient_Bar_Adamantite"], "count": 8, "label": "Adamantite Ore" }
+            { "type": "item", "ids": ["Ore_Adamantite", "Ingredient_Bar_Adamantite"], "count": 8, "label": "Adamantite Ore", "find": ["Ore_Adamantite*"] }
           ],
           "skipIf": [
             { "type": "item", "ids": ["Tool_Pickaxe_Adamantite"], "count": 1 }
@@ -464,6 +494,8 @@
           "id": "smelt_adamantite",
           "title": "Smelt Adamantite Ingots",
           "text": "Smelt the Adamantite Ore in your Furnace (about 20 seconds each).",
+          "find": ["Bench_Furnace*"],
+          "findLabel": "Furnace",
           "objectives": [
             { "type": "item", "id": "Ingredient_Bar_Adamantite", "count": 8, "label": "Adamantite Ingots" }
           ],
@@ -475,6 +507,8 @@
           "id": "craft_adamantite_pickaxe",
           "title": "Craft an Adamantite Pickaxe",
           "text": "At the Tier 3 Workbench (Tools tab): 8 Adamantite Ingots, 3 Heavy Leather, 4 Cindercloth Scraps. You've mastered the ore ladder!",
+          "find": ["Bench_WorkBench*"],
+          "findLabel": "Workbench",
           "objectives": [
             { "type": "item", "id": "Tool_Pickaxe_Adamantite", "count": 1, "label": "Adamantite Pickaxe" }
           ]

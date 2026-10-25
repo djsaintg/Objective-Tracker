@@ -10,6 +10,7 @@ public final class PlayerProgress {
     public String currentStep;
     public Set<String> completedSteps = new HashSet<>();
     public boolean hudVisible = true;
+    public boolean waypoints = true;
     public boolean finished;
 
     public transient boolean dirty;

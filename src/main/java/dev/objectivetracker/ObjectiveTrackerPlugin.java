@@ -2,16 +2,23 @@ package dev.objectivetracker;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.HytaleServer;
+import com.hypixel.hytale.server.core.asset.common.CommonAssetRegistry;
 import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.Universe;
+import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.events.AddWorldEvent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import dev.objectivetracker.command.GuideCommand;
 import dev.objectivetracker.guide.Guide;
 import dev.objectivetracker.guide.GuideLoader;
+import dev.objectivetracker.hud.GuideHud;
 import dev.objectivetracker.progress.ProgressStore;
+import dev.objectivetracker.waypoint.ArrowTickSystem;
+import dev.objectivetracker.waypoint.WaypointMarkerProvider;
 import java.io.IOException;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +28,7 @@ public final class ObjectiveTrackerPlugin extends JavaPlugin {
     private static final String GUIDE_NAME = "survival";
 
     private GuideService service;
+    private WaypointMarkerProvider markerProvider;
     private ScheduledFuture<?> ticker;
     private ScheduledFuture<?> autosave;
 
@@ -38,15 +46,28 @@ public final class ObjectiveTrackerPlugin extends JavaPlugin {
             throw new IllegalStateException("Could not load the survival guide", e);
         }
         service = new GuideService(guide, new ProgressStore(getDataDirectory(), getLogger()), getLogger());
+        markerProvider = new WaypointMarkerProvider(service.waypoints());
 
         getCommandRegistry().registerCommand(new GuideCommand(service));
         getEventRegistry().registerGlobal(PlayerReadyEvent.class, this::onPlayerReady);
         getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, this::onPlayerDisconnect);
+        getEntityStoreRegistry().registerSystem(new ArrowTickSystem(service, getLogger()));
+        getEventRegistry().registerGlobal(AddWorldEvent.class, event -> addMarkerProvider(event.getWorld()));
     }
 
     @Override
     protected void start() {
         GuideLoader.validateItems(service.guide(), getLogger());
+        GuideLoader.validateBlocks(service.guide(), service.finder(), getLogger());
+        boolean arrows = CommonAssetRegistry.hasCommonAsset("UI/Custom/" + GuideHud.ARROW_DOCUMENT);
+        service.setArrowsAvailable(arrows);
+        if (!arrows) {
+            getLogger().atWarning().log("Waypoint arrow images not found (is the asset pack enabled?); using text directions.");
+        }
+        // Worlds that were loaded before this plugin started don't fire AddWorldEvent for us.
+        for (World world : Universe.get().getWorlds().values()) {
+            addMarkerProvider(world);
+        }
         ticker = HytaleServer.SCHEDULED_EXECUTOR.scheduleWithFixedDelay(this::tick, 1, 1, TimeUnit.SECONDS);
         autosave = HytaleServer.SCHEDULED_EXECUTOR.scheduleWithFixedDelay(service.store()::saveAll, 60, 60, TimeUnit.SECONDS);
     }
@@ -62,6 +83,10 @@ public final class ObjectiveTrackerPlugin extends JavaPlugin {
         if (service != null) {
             service.store().saveAll();
         }
+    }
+
+    private void addMarkerProvider(World world) {
+        world.getWorldMapManager().addMarkerProvider(WaypointMarkerProvider.KEY, markerProvider);
     }
 
     private void tick() {

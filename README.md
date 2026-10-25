@@ -10,6 +10,8 @@ Gather sticks and plant fiber
 Pick up loose sticks lying on the ground...
 [X]  Sticks   6/6
 [  ]  Plant Fiber   2/6
+  ↖  Plant Fiber
+     14m
 Tip: Forest edges near spawn have plenty of both.
 Step 2 / 40   -   /guide help
 ```
@@ -25,11 +27,20 @@ Step 2 / 40   -   /guide help
   - `zone`: enter a zone (`Zone2`, `Zone3`, …),
   - `below`: go below a Y level,
   - `manual`: confirm it yourself with `/guide done` (e.g. "upgrade your workbench").
+- **Waypoints**: where the game world allows it, the guide points you at the nearest thing you
+  need: loose sticks, bushes, rubble, trees, stone, each ore, or the bench you should craft at.
+  You get a marker on the world map and compass, plus an arrow on the panel that follows your
+  camera (updated every world tick, 30 times a second, 64 directions) and shades from green when you're facing the
+  target to red when it's behind you, with the distance and how far up or down it is. The search only looks at chunks that are
+  already loaded (up to ~80 blocks around you) and is refreshed every 2 seconds. Steps whose
+  target can't be found by looking at blocks (hunting, zone travel) don't show one.
 - **Smart skipping**: each step can have `skipIf` conditions, so a player who already has an iron
   pickaxe isn't told to go and collect sticks.
 - **Progress is saved per player** (by UUID) and survives restarts.
-- **No asset pack needed**: the HUD is sent as inline UI markup, the same way the game's built-in
-  spectator HUD works.
+- **Small asset pack**: the panel itself is inline UI markup (like the game's spectator HUD); the
+  jar also carries the 64 arrow images and `GuideArrow.ui` under `Common/UI/Custom/ObjectiveTracker`
+  (`IncludesAssetPack` in the manifest). If those aren't available the panel falls back to text
+  directions. Regenerate the images and `GuideArrow.ui` with `python3 tools/make_arrows.py` (needs Pillow).
 
 ## Commands
 
@@ -38,6 +49,7 @@ All players can use these (`/og` is an alias):
 | Command | What it does |
 |---|---|
 | `/guide show` / `/guide hide` | Toggle the panel |
+| `/guide waypoint` | Turn waypoints on or off |
 | `/guide done` | Finish the current step (for "manual" steps) |
 | `/guide skip` / `/guide back` | Move one step forward / back |
 | `/guide list` | List every step with your progress |
@@ -50,7 +62,7 @@ All players can use these (`/og` is an alias):
 Requirements: JDK 25 or newer, Gradle, and Hytale installed through the launcher.
 
 ```bash
-gradle build          # -> build/libs/ObjectiveTracker-0.1.0.jar
+gradle build          # -> build/libs/ObjectiveTracker-<version>.jar
 gradle installMod     # builds and copies the jar into Hytale's UserData/Mods folder
 gradle runServer      # starts a local dedicated server in ./run with the plugin loaded
 ```
@@ -92,13 +104,19 @@ Step format:
   "text": "Shown under the title.",
   "hint": "Optional tip line.",
   "objectives": [
-    { "type": "item", "ids": ["Ore_Copper", "Ingredient_Bar_Copper"], "count": 9, "label": "Copper Ore" }
+    { "type": "item", "ids": ["Ore_Copper", "Ingredient_Bar_Copper"], "count": 9, "label": "Copper Ore",
+      "find": ["Ore_Copper*"] }
   ],
   "skipIf": [
     { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron"], "count": 1 }
   ]
 }
 ```
+
+`find` lists block ids to point the waypoint at while that objective is unfinished (`*` is a
+wildcard; block states like a lit furnace are included automatically). A step can also have its
+own `"find"` and `"findLabel"`, used when no unfinished objective has one, e.g. the Workbench for a
+crafting step. Patterns that match no block are listed as a warning at startup.
 
 Step `id`s are what's saved in player progress, so keep them stable when editing.
 
@@ -109,6 +127,7 @@ src/main/java/dev/objectivetracker/
   ObjectiveTrackerPlugin.java   plugin entry: registers command, events, 1s ticker
   GuideService.java             evaluates objectives, advances steps, drives the HUD
   hud/GuideHud.java             the on-screen panel (CustomUIHud + inline markup)
+  waypoint/                     nearest-block search + world map/compass marker
   command/GuideCommand.java     /guide subcommands
   guide/                        guide data model + JSON loader
   progress/                     per-player progress (JSON files)

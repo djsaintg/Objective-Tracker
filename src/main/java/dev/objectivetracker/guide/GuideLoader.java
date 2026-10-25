@@ -3,6 +3,7 @@ package dev.objectivetracker.guide;
 import com.google.gson.Gson;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.asset.type.item.config.Item;
+import dev.objectivetracker.waypoint.BlockFinder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,7 +12,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Loads a guide from {@code <plugin data dir>/guides/<name>.json} if present (so server owners can
@@ -73,6 +76,31 @@ public final class GuideLoader {
         }
         if (!unknown.isEmpty()) {
             logger.atWarning().log("Guide references unknown item ids (those objectives can never complete): %s", unknown);
+        }
+    }
+
+    /** Warns about waypoint patterns that match no block type (their waypoint would never show). */
+    public static void validateBlocks(Guide guide, BlockFinder finder, HytaleLogger logger) {
+        Set<String> unmatched = new TreeSet<>();
+        for (GuideStep step : guide.steps) {
+            checkBlocks(step.find, finder, unmatched);
+            for (Objective o : step.objectives) {
+                checkBlocks(o.find, finder, unmatched);
+            }
+        }
+        if (!unmatched.isEmpty()) {
+            logger.atWarning().log("Guide waypoint patterns match no block type: %s", unmatched);
+        }
+    }
+
+    private static void checkBlocks(List<String> patterns, BlockFinder finder, Set<String> unmatched) {
+        if (patterns == null) {
+            return;
+        }
+        for (String pattern : patterns) {
+            if (finder.resolve(List.of(pattern)).isEmpty()) {
+                unmatched.add(pattern);
+            }
         }
     }
 

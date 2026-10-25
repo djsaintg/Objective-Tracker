@@ -28,6 +28,7 @@ public final class GuideCommand extends AbstractCommandCollection {
         setPermissionGroups("hytale:Adventurer");
         addSubCommand(new Show(service));
         addSubCommand(new Hide(service));
+        addSubCommand(new WaypointToggle(service));
         addSubCommand(new Done(service));
         addSubCommand(new Skip(service));
         addSubCommand(new Back(service));
@@ -92,6 +93,19 @@ public final class GuideCommand extends AbstractCommandCollection {
         protected void run(CommandContext context, PlayerRef playerRef, Player player, PlayerProgress progress) {
             service.setHudVisible(playerRef, player, progress, false);
             context.sendMessage(info("Guide hidden. /guide show brings it back."));
+        }
+    }
+
+    private static final class WaypointToggle extends GuideSubCommand {
+        WaypointToggle(GuideService service) {
+            super("waypoint", "Turn the waypoint marker on or off", service);
+        }
+
+        @Override
+        protected void run(CommandContext context, PlayerRef playerRef, Player player, PlayerProgress progress) {
+            boolean enabled = !progress.waypoints;
+            service.setWaypointsEnabled(playerRef, progress, enabled);
+            context.sendMessage(info(enabled ? "Waypoints on." : "Waypoints off. /guide waypoint turns them back on."));
         }
     }
 
@@ -204,6 +218,7 @@ public final class GuideCommand extends AbstractCommandCollection {
         ) {
             context.sendMessage(info("Commands:"));
             context.sendMessage(Message.raw(" /guide show | hide  - toggle the HUD"));
+            context.sendMessage(Message.raw(" /guide waypoint  - toggle the waypoint marker"));
             context.sendMessage(Message.raw(" /guide done  - finish the current step (for steps you confirm yourself)"));
             context.sendMessage(Message.raw(" /guide skip | back  - move forward / backward one step"));
             context.sendMessage(Message.raw(" /guide list  - see every step;  /guide step <n>  - jump to one"));

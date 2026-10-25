@@ -12,6 +12,9 @@ import java.util.List;
  *   <li>{@code below}    - be at or below Y = {@code count}</li>
  *   <li>{@code manual}   - the player confirms it themselves with /guide done</li>
  * </ul>
+ *
+ * <p>{@code find} optionally lists block ids (with {@code *} wildcards) to point a waypoint at
+ * while this objective is unfinished, e.g. {@code ["Ore_Copper*"]}.
  */
 public final class Objective {
     public String type = "item";
@@ -19,6 +22,7 @@ public final class Objective {
     public List<String> ids;
     public int count = 1;
     public String label;
+    public List<String> find;
 
     public Type kind() {
         return Type.parse(type);

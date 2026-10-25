@@ -11,6 +11,10 @@ public final class GuideStep {
     public List<Objective> objectives = List.of();
     /** If the player meets ANY of these, the step is skipped (e.g. already owns a better tool). */
     public List<Objective> skipIf = List.of();
+    /** Block ids to point a waypoint at when no unfinished objective has its own (e.g. the bench to craft at). */
+    public List<String> find;
+    /** Name shown for {@link #find} targets, e.g. "Workbench". */
+    public String findLabel;
 
     /** Filled in by {@link GuideLoader}. */
     public transient String chapterTitle;

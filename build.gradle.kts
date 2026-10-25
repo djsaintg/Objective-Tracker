@@ -52,6 +52,11 @@ val installMod by tasks.registering(Copy::class) {
     group = "hytale"
     description = "Builds the plugin and copies it into the Hytale UserData/Mods folder."
     dependsOn(tasks.jar)
+    // Remove other versions first, or Hytale would load the plugin twice.
+    doFirst {
+        hytaleModsDir.listFiles { f -> f.name.startsWith("ObjectiveTracker-") && f.name.endsWith(".jar") }
+            ?.forEach { it.delete() }
+    }
     from(tasks.jar.flatMap { it.archiveFile })
     into(hytaleModsDir)
 }
@@ -64,6 +69,8 @@ val runServer by tasks.registering(JavaExec::class) {
     val runDir = layout.projectDirectory.dir("run").asFile
     doFirst {
         runDir.resolve("mods").mkdirs()
+        runDir.resolve("mods").listFiles { f -> f.name.startsWith("ObjectiveTracker-") && f.name.endsWith(".jar") }
+            ?.forEach { it.delete() }
         copy {
             from(tasks.jar.flatMap { it.archiveFile })
             into(runDir.resolve("mods"))
