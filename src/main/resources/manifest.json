@@ -1,0 +1,11 @@
+{
+  "Group": "ObjectiveTracker",
+  "Name": "ObjectiveTracker",
+  "Version": "${version}",
+  "Description": "A step-by-step survival guide HUD, in the spirit of Zygor Guides: walks you from your first sticks and pebbles to adamantite.",
+  "Authors": [
+    { "Name": "djsaintg" }
+  ],
+  "Main": "dev.objectivetracker.ObjectiveTrackerPlugin",
+  "ServerVersion": ">=0.7.4"
+}

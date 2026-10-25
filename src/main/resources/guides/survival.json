@@ -1,0 +1,485 @@
+{
+  "id": "survival",
+  "title": "Survival Guide",
+  "chapters": [
+    {
+      "title": "Chapter 1 - First Steps",
+      "steps": [
+        {
+          "id": "welcome",
+          "title": "Welcome to Orbis",
+          "text": "This guide walks you from bare hands to adamantite. Steps tick off automatically as items land in your inventory. Type /guide done to continue.",
+          "hint": "/guide hide hides this panel, /guide list shows every step.",
+          "objectives": [
+            { "type": "manual", "label": "Read this, then type /guide done" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Crude", "Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "gather_sticks_fiber",
+          "title": "Gather sticks and plant fiber",
+          "text": "Pick up loose sticks lying on the ground and break small branches. Break tall grass, bushes and tree leaves by hand for Plant Fiber.",
+          "hint": "Forest edges near spawn have plenty of both.",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Stick", "count": 6, "label": "Sticks" },
+            { "type": "item", "id": "Ingredient_Fibre", "count": 6, "label": "Plant Fiber" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Crude", "Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "gather_rubble",
+          "title": "Collect rubble (pebbles)",
+          "text": "Small loose stones are scattered on the ground, especially near rocks and cliffs. Pick them up by hand.",
+          "hint": "Any rubble type counts: stone, calcite, basalt and so on.",
+          "objectives": [
+            { "type": "resource", "id": "Rubble", "count": 6, "label": "Rubble (any)" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Crude", "Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "craft_crude_pickaxe",
+          "title": "Craft a Crude Pickaxe",
+          "text": "Open your inventory and use the pocket crafting (Fieldcraft) tab, Tools section. Recipe: 2 Rubble, 2 Plant Fiber, 2 Sticks.",
+          "objectives": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Crude", "Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1, "label": "Crude Pickaxe" }
+          ]
+        },
+        {
+          "id": "craft_crude_hatchet",
+          "title": "Craft a Crude Hatchet",
+          "text": "Same Fieldcraft Tools tab. Recipe: 2 Rubble, 2 Plant Fiber, 2 Sticks. The hatchet chops trees far faster than your fists.",
+          "objectives": [
+            { "type": "item", "ids": ["Tool_Hatchet_Crude", "Tool_Hatchet_Copper", "Tool_Hatchet_Iron", "Tool_Hatchet_Thorium", "Tool_Hatchet_Cobalt", "Tool_Hatchet_Adamantite"], "count": 1, "label": "Crude Hatchet" }
+          ]
+        },
+        {
+          "id": "chop_wood",
+          "title": "Chop some logs",
+          "text": "Use your hatchet on tree trunks. You'll need logs for the Workbench, the Furnace and your first metal tools.",
+          "hint": "Any tree works; logs of every type count.",
+          "objectives": [
+            { "type": "resource", "id": "Wood_Trunk", "count": 16, "label": "Logs (any wood)" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "mine_stone",
+          "title": "Mine some stone",
+          "text": "Use your Crude Pickaxe on exposed stone. Cobblestone is needed for the Workbench and the Furnace.",
+          "objectives": [
+            { "type": "resource", "id": "Rock", "count": 12, "label": "Stone / cobblestone (any)" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "craft_workbench",
+          "title": "Craft and place a Workbench",
+          "text": "In Fieldcraft, craft a Workbench (4 Logs, 3 Stone). Place it somewhere you'll use as your base. Most recipes from here on need it.",
+          "objectives": [
+            { "type": "item", "id": "Bench_WorkBench", "count": 1, "label": "Workbench" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Bench_Furnace", "Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "craft_campfire",
+          "title": "Build a Campfire",
+          "text": "A Campfire (4 Sticks, 2 Rubble) lights up your base and lets you cook meat, which heals far more than raw food.",
+          "hint": "Optional. Type /guide skip if you'd rather push on.",
+          "objectives": [
+            { "type": "item", "id": "Bench_Campfire", "count": 1, "label": "Campfire" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Chapter 2 - The Copper Age",
+      "steps": [
+        {
+          "id": "craft_furnace",
+          "title": "Craft and place a Furnace",
+          "text": "At the Workbench (Crafting tab), craft a Furnace: 6 Logs, 6 Stone. Place it next to your Workbench. The Furnace smelts ore into ingots.",
+          "objectives": [
+            { "type": "item", "id": "Bench_Furnace", "count": 1, "label": "Furnace" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Ingredient_Bar_Copper", "Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "mine_copper",
+          "title": "Find and mine Copper Ore",
+          "text": "Copper forms small veins inside grey stone in Zone 1. Explore caves, ravines and cliff faces near spawn and look for stone flecked with orange.",
+          "hint": "Copper is common in shallow caves. Bring a torch or campfire light if it's dark.",
+          "objectives": [
+            { "type": "item", "ids": ["Ore_Copper", "Ingredient_Bar_Copper"], "count": 9, "label": "Copper Ore" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "smelt_copper",
+          "title": "Smelt Copper Ingots",
+          "text": "Open the Furnace, add fuel (logs, sticks or plant fiber all burn) and put Copper Ore in. Each ore becomes one ingot.",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Bar_Copper", "count": 6, "label": "Copper Ingots" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "craft_copper_pickaxe",
+          "title": "Craft a Copper Pickaxe",
+          "text": "At the Workbench (Tools tab): 3 Copper Ingots, 6 Logs, 1 Plant Fiber. It mines stone much faster and can break Iron Ore.",
+          "objectives": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Copper", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1, "label": "Copper Pickaxe" }
+          ]
+        },
+        {
+          "id": "craft_copper_hatchet",
+          "title": "Craft a Copper Hatchet",
+          "text": "At the Workbench (Tools tab): 3 Copper Ingots, 6 Logs, 3 Plant Fiber. You'll want a lot more wood from here on.",
+          "hint": "Optional. Type /guide skip to move on.",
+          "objectives": [
+            { "type": "item", "ids": ["Tool_Hatchet_Copper", "Tool_Hatchet_Iron", "Tool_Hatchet_Thorium", "Tool_Hatchet_Cobalt", "Tool_Hatchet_Adamantite"], "count": 1, "label": "Copper Hatchet" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Chapter 3 - The Iron Age",
+      "steps": [
+        {
+          "id": "hunt_light_hide",
+          "title": "Hunt for Light Hide",
+          "text": "Deer, antelope and other wildlife drop Light Hide. You need 3 for a Tanning Rack plus 2 more to tan into leather for the Iron Pickaxe.",
+          "hint": "Grassy plains and forests in Zone 1. Approach slowly, since they spook easily.",
+          "objectives": [
+            { "type": "item", "ids": ["Ingredient_Hide_Light", "Ingredient_Leather_Light"], "count": 5, "label": "Light Hide" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "craft_tannery",
+          "title": "Craft a Tanning Rack",
+          "text": "At the Workbench (Crafting tab): 6 Logs, 3 Stone, 3 Light Hide. Place it at your base.",
+          "objectives": [
+            { "type": "item", "id": "Bench_Tannery", "count": 1, "label": "Tanning Rack" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Ingredient_Leather_Light", "Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "tan_light_leather",
+          "title": "Tan Light Leather",
+          "text": "Put Light Hide on the Tanning Rack. Each hide becomes 1 Light Leather (about 20 seconds each).",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Leather_Light", "count": 2, "label": "Light Leather" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "collect_linen",
+          "title": "Collect Linen Scraps",
+          "text": "Skeletons and other undead drop Linen Scraps, and so do some hostile camps. Crude fishing traps can also pull some up.",
+          "hint": "Undead come out in dark caves and at night. Fight them with a weapon, not your pickaxe.",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Fabric_Scrap_Linen", "count": 2, "label": "Linen Scraps" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "mine_iron",
+          "title": "Find and mine Iron Ore",
+          "text": "Iron veins sit in stone, basalt and volcanic rock, usually deeper in Zone 1 caves than copper. Your Copper Pickaxe can break them.",
+          "hint": "Follow caves downward. Dark rock (basalt) areas are a good sign.",
+          "objectives": [
+            { "type": "item", "ids": ["Ore_Iron", "Ingredient_Bar_Iron"], "count": 5, "label": "Iron Ore" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "smelt_iron",
+          "title": "Smelt Iron Ingots",
+          "text": "Smelt the Iron Ore in your Furnace. Each ore takes about 14 seconds.",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Bar_Iron", "count": 5, "label": "Iron Ingots" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "craft_iron_pickaxe",
+          "title": "Craft an Iron Pickaxe",
+          "text": "At the Workbench (Tools tab): 5 Iron Ingots, 2 Light Leather, 2 Linen Scraps.",
+          "objectives": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Iron", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1, "label": "Iron Pickaxe" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Chapter 4 - Upgrade the Workbench",
+      "steps": [
+        {
+          "id": "stockpile_tier2",
+          "title": "Stockpile for a Workbench upgrade",
+          "text": "Better tools need a Tier 2 Workbench. The upgrade costs 30 Copper Ingots, 20 Iron Ingots and 20 Linen Scraps. Mine, smelt and hunt undead until you have them.",
+          "hint": "Keep these items in your inventory so the guide can count them.",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Bar_Copper", "count": 30, "label": "Copper Ingots" },
+            { "type": "item", "id": "Ingredient_Bar_Iron", "count": 20, "label": "Iron Ingots" },
+            { "type": "item", "id": "Ingredient_Fabric_Scrap_Linen", "count": 20, "label": "Linen Scraps" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "upgrade_workbench_2",
+          "title": "Upgrade your Workbench to Tier 2",
+          "text": "Open the Workbench and use its upgrade button to spend the materials. Tier 2 unlocks Thorium and Cobalt gear.",
+          "objectives": [
+            { "type": "manual", "label": "Upgrade the Workbench, then /guide done" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Chapter 5 - Zone 2: Thorium",
+      "steps": [
+        {
+          "id": "travel_zone2",
+          "title": "Travel to Zone 2 (Howling Sands)",
+          "text": "Head into the desert regions (Golden Steppes, Badlands, Desolate Basin). Pack food, bandages and a weapon: enemies hit harder here.",
+          "hint": "Check your world map. Zone 2 borders Zone 1 and is warm, sandy and red-rocked.",
+          "objectives": [
+            { "type": "zone", "id": "Zone2", "label": "Enter Zone 2" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Ore_Thorium", "Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "mine_thorium",
+          "title": "Mine Thorium Ore",
+          "text": "Thorium veins form in sandstone, dry mud and volcanic rock in Zone 2 caves. The Iron Pickaxe can mine it.",
+          "objectives": [
+            { "type": "item", "ids": ["Ore_Thorium", "Ingredient_Bar_Thorium"], "count": 6, "label": "Thorium Ore" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "medium_leather",
+          "title": "Get Medium Leather",
+          "text": "Larger animals (moose, and beasts at hostile encounters in Zone 2 and up) drop Medium Hide. Tan it at the Tanning Rack.",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Leather_Medium", "count": 2, "label": "Medium Leather" },
+            { "type": "item", "id": "Ingredient_Fabric_Scrap_Linen", "count": 3, "label": "Linen Scraps" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "smelt_thorium",
+          "title": "Smelt Thorium Ingots",
+          "text": "Back at base, smelt the Thorium Ore in your Furnace (about 18 seconds each).",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Bar_Thorium", "count": 6, "label": "Thorium Ingots" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "craft_thorium_pickaxe",
+          "title": "Craft a Thorium Pickaxe",
+          "text": "At the Tier 2 Workbench (Tools tab): 6 Thorium Ingots, 2 Medium Leather, 3 Linen Scraps.",
+          "objectives": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Thorium", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1, "label": "Thorium Pickaxe" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Chapter 6 - Zone 3: Cobalt",
+      "steps": [
+        {
+          "id": "travel_zone3",
+          "title": "Travel to Zone 3 (Borea)",
+          "text": "Head for the frozen north: Frostmarch Tundra, Boreal Reach and The Everfrost. Warm armor and plenty of food help a lot.",
+          "objectives": [
+            { "type": "zone", "id": "Zone3", "label": "Enter Zone 3" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Ore_Cobalt", "Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "mine_cobalt",
+          "title": "Mine Cobalt Ore",
+          "text": "Cobalt veins form in shale, slate and basalt in Zone 3 caves. It's dark blue against the grey rock.",
+          "objectives": [
+            { "type": "item", "ids": ["Ore_Cobalt", "Ingredient_Bar_Cobalt"], "count": 7, "label": "Cobalt Ore" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "cobalt_materials",
+          "title": "Heavy Leather and Shadoweave",
+          "text": "Heavy Hide comes from big beasts like Mosshorns and Trillodons. Tan it into Heavy Leather. Outlanders in Zone 3 drop Shadoweave Scraps.",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Leather_Heavy", "count": 2, "label": "Heavy Leather" },
+            { "type": "item", "id": "Ingredient_Fabric_Scrap_Shadoweave", "count": 4, "label": "Shadoweave Scraps" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "smelt_cobalt",
+          "title": "Smelt Cobalt Ingots",
+          "text": "Smelt the Cobalt Ore in your Furnace.",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Bar_Cobalt", "count": 7, "label": "Cobalt Ingots" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "craft_cobalt_pickaxe",
+          "title": "Craft a Cobalt Pickaxe",
+          "text": "At the Tier 2 Workbench (Tools tab): 7 Cobalt Ingots, 2 Heavy Leather, 4 Shadoweave Scraps.",
+          "objectives": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Cobalt", "Tool_Pickaxe_Adamantite"], "count": 1, "label": "Cobalt Pickaxe" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Chapter 7 - Tier 3 Workbench",
+      "steps": [
+        {
+          "id": "stockpile_tier3",
+          "title": "Stockpile for the Tier 3 upgrade",
+          "text": "Adamantite gear needs a Tier 3 Workbench. Essence of Fire drops from burnt undead and fiery foes in Zone 4.",
+          "hint": "This is a big grind. Set up a mining and hunting loop, and store extras in chests.",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Bar_Thorium", "count": 30, "label": "Thorium Ingots" },
+            { "type": "item", "id": "Ingredient_Bar_Cobalt", "count": 20, "label": "Cobalt Ingots" },
+            { "type": "item", "id": "Ingredient_Leather_Heavy", "count": 30, "label": "Heavy Leather" },
+            { "type": "item", "id": "Ingredient_Fabric_Scrap_Shadoweave", "count": 50, "label": "Shadoweave Scraps" },
+            { "type": "item", "id": "Ingredient_Fire_Essence", "count": 25, "label": "Essence of Fire" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "upgrade_workbench_3",
+          "title": "Upgrade your Workbench to Tier 3",
+          "text": "Spend the materials on the Workbench upgrade. It also crafts noticeably faster at this tier.",
+          "objectives": [
+            { "type": "manual", "label": "Upgrade the Workbench, then /guide done" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Chapter 8 - Zone 4: Adamantite",
+      "steps": [
+        {
+          "id": "travel_zone4",
+          "title": "Travel to Zone 4 (Devastated Lands)",
+          "text": "The Cinder Wastes and Charred Woodlands are the most dangerous zone. Bring your best armor, potions and food.",
+          "objectives": [
+            { "type": "zone", "id": "Zone4", "label": "Enter Zone 4" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Ore_Adamantite", "Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "mine_adamantite",
+          "title": "Mine Adamantite Ore",
+          "text": "Adamantite veins run through stone, basalt, slate and cooled magma in Zone 4 caves. Watch out for lava.",
+          "objectives": [
+            { "type": "item", "ids": ["Ore_Adamantite", "Ingredient_Bar_Adamantite"], "count": 8, "label": "Adamantite Ore" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "adamantite_materials",
+          "title": "Heavy Leather and Cindercloth",
+          "text": "Burnt zombies, wraiths and incandescent skeletons in Zone 4 drop Cindercloth Scraps.",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Leather_Heavy", "count": 3, "label": "Heavy Leather" },
+            { "type": "item", "id": "Ingredient_Fabric_Scrap_Cindercloth", "count": 4, "label": "Cindercloth Scraps" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "smelt_adamantite",
+          "title": "Smelt Adamantite Ingots",
+          "text": "Smelt the Adamantite Ore in your Furnace (about 20 seconds each).",
+          "objectives": [
+            { "type": "item", "id": "Ingredient_Bar_Adamantite", "count": 8, "label": "Adamantite Ingots" }
+          ],
+          "skipIf": [
+            { "type": "item", "ids": ["Tool_Pickaxe_Adamantite"], "count": 1 }
+          ]
+        },
+        {
+          "id": "craft_adamantite_pickaxe",
+          "title": "Craft an Adamantite Pickaxe",
+          "text": "At the Tier 3 Workbench (Tools tab): 8 Adamantite Ingots, 3 Heavy Leather, 4 Cindercloth Scraps. You've mastered the ore ladder!",
+          "objectives": [
+            { "type": "item", "id": "Tool_Pickaxe_Adamantite", "count": 1, "label": "Adamantite Pickaxe" }
+          ]
+        }
+      ]
+    }
+  ]
+}

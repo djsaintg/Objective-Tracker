@@ -1,0 +1,32 @@
+# --- Build output (regenerate with `gradle build`) ---------------------
+build/
+.gradle/
+*.class
+
+# --- Local test server and built jars ---------------------------------
+# `gradle runServer` creates a whole Hytale server (worlds, logs, auth) here
+run/
+# Copies of release jars; the real ones are attached to GitHub releases
+releases/
+*.jar
+
+# --- Personal config: your own Hytale install paths -------------------
+local.properties
+
+# --- Secrets: never commit these --------------------------------------
+.env
+.env.*
+*.key
+auth.enc
+
+# --- Editors / OS -----------------------------------------------------
+.vscode/
+.idea/
+*.iml
+*.swp
+.DS_Store
+Thumbs.db
+
+# --- Private working notes (not for the repo) -------------------------
+HANDOVER.md
+GITHUB_COMMANDS.md
